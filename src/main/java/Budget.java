@@ -3,57 +3,41 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 
 public class Budget {
-    String yearMonth;
-    int amount;
+    private String yearMonth;
+    private int amount;
 
     public Budget(String yearMonth, int amount) {
         this.yearMonth = yearMonth;
         this.amount = amount;
     }
 
-    public String getYearMonth() {
-        return yearMonth;
-    }
-
-    public void setYearMonth(String yearMonth) {
-        this.yearMonth = yearMonth;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public int dayCount() {
-        YearMonth month = getBudgetMonth();
-        return month.lengthOfMonth();
-    }
-
-    public double dailyAmount() {
-        return (double) getAmount() / dayCount();
-    }
-
-    public LocalDate lastDay() {
-
-        return getBudgetMonth().atEndOfMonth();
-    }
-
-    public LocalDate firstDay() {
-        return getBudgetMonth().atDay(1);
-    }
-
-    public Period createPeriod() {
-        return new Period(firstDay(), lastDay());
-    }
-
     public double getTotalAmount(Period period) {
         return period.getOverlappingDays(createPeriod()) * dailyAmount();
     }
 
+    private Period createPeriod() {
+        return new Period(firstDay(), lastDay());
+    }
+
+    private double dailyAmount() {
+        return (double) amount / dayCount();
+    }
+
+    private int dayCount() {
+        YearMonth month = getBudgetMonth();
+        return month.lengthOfMonth();
+    }
+
+    private LocalDate firstDay() {
+        return getBudgetMonth().atDay(1);
+    }
+
     private YearMonth getBudgetMonth() {
         return YearMonth.parse(yearMonth, DateTimeFormatter.ofPattern("yyyyMM"));
+    }
+
+    private LocalDate lastDay() {
+
+        return getBudgetMonth().atEndOfMonth();
     }
 }

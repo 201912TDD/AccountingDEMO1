@@ -46,7 +46,8 @@ public class Accounting {
                     totalAmount += diff * budget.dailyAmount();
                 }
                 else {
-                    totalAmount += (double) budget.amount;
+                    int diff = budget.dayCount();
+                    totalAmount += diff * budget.dailyAmount();
                 }
             }
 

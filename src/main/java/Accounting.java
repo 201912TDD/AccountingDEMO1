@@ -36,7 +36,7 @@ public class Accounting {
 
             for (Budget budget : budgets) {
 
-                long overlappingDays = new Period(start, end).getOverlappingDays(budget);
+                long overlappingDays = new Period(start, end).getOverlappingDays(new Period(budget.firstDay(), budget.lastDay()));
 
                 totalAmount += overlappingDays * budget.dailyAmount();
             }

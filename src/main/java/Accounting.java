@@ -34,17 +34,25 @@ public class Accounting {
         else {
             //firstMonth
             double startMonthAmount = 0;
+            Budget startMonthBudget = null;
+            for (Budget budget : budgets) {
+                if (budget.getYearMonth().equals(start.format(DateTimeFormatter.ofPattern("yyyyMM")))) {
 
-            List<Budget> startMonthBudget = budgets.stream().filter(bd -> {
-                YearMonth d = YearMonth.parse(bd.yearMonth, formatter);
-                YearMonth startYM = YearMonth.from(start);
-                return startYM.equals(d);
-            }).collect(Collectors.toList());
-
-            startMonthAmount = startMonthBudget.stream().mapToDouble(budget -> {
-                int diff = start.lengthOfMonth() - start.getDayOfMonth() + 1;
-                return budget.amount * (diff) / start.lengthOfMonth();
-            }).sum();
+                    int diff = start.lengthOfMonth() - start.getDayOfMonth() + 1;
+                    startMonthAmount = budget.amount * (diff) / start.lengthOfMonth();
+                    startMonthBudget = budget;
+                }
+            }
+//            List<Budget> startMonthBudget = budgets.stream().filter(bd -> {
+//                YearMonth d = YearMonth.parse(bd.yearMonth, formatter);
+//                YearMonth startYM = YearMonth.from(start);
+//                return startYM.equals(d);
+//            }).collect(Collectors.toList());
+//
+//            startMonthAmount = startMonthBudget.stream().mapToDouble(budget -> {
+//                int diff = start.lengthOfMonth() - start.getDayOfMonth() + 1;
+//                return budget.amount * (diff) / start.lengthOfMonth();
+//            }).sum();
 
             //last month
             List<Budget> endMonthBudget = budgets.stream().filter(bd -> {
@@ -60,7 +68,7 @@ public class Accounting {
 
             // middle
             List<Budget> middleBudgets = budgets;
-            middleBudgets.removeAll(startMonthBudget);
+            middleBudgets.remove(startMonthBudget);
             middleBudgets.removeAll(endMonthBudget);
 
             double middleMonthAmount = middleBudgets.stream().mapToDouble(budget -> budget.amount).sum();

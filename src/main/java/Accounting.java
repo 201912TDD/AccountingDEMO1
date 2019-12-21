@@ -32,12 +32,12 @@ public class Accounting {
             return totalBudget;
         }
         else {
+
+            Period period = new Period(start, end);
+
             double totalAmount = 0;
-
             for (Budget budget : budgets) {
-
-                long overlappingDays = new Period(start, end).getOverlappingDays(new Period(budget.firstDay(), budget.lastDay()));
-
+                long overlappingDays = period.getOverlappingDays(new Period(budget.firstDay(), budget.lastDay()));
                 totalAmount += overlappingDays * budget.dailyAmount();
             }
 

@@ -50,14 +50,21 @@ public class Accounting {
     private long getOverlappingDays(Period period, Budget budget) {
         long overlappingDays;
         if (budget.getYearMonth().equals(period.getStart().format(DateTimeFormatter.ofPattern("yyyyMM")))) {
-            overlappingDays = DAYS.between(period.getStart(), budget.lastDay()) + 1;
-        }
-        else if (budget.getYearMonth().equals(period.getEnd().format(DateTimeFormatter.ofPattern("yyyyMM")))) {
-            overlappingDays = DAYS.between(budget.firstDay(), period.getEnd()) + 1;
+            LocalDate overlappingStart = period.getStart();
+            LocalDate overlappingEnd = budget.lastDay();
+            overlappingDays = DAYS.between(overlappingStart, overlappingEnd) + 1;
         }
         else {
-            overlappingDays = DAYS.between(budget.firstDay(), budget.lastDay()) + 1;
-//            overlappingDays = budget.dayCount();
+            if (budget.getYearMonth().equals(period.getEnd().format(DateTimeFormatter.ofPattern("yyyyMM")))) {
+                LocalDate overlappingStart = budget.firstDay();
+                LocalDate overlappingEnd = period.getEnd();
+                overlappingDays = DAYS.between(overlappingStart, overlappingEnd) + 1;
+            }
+            else {
+                LocalDate overlappingStart = budget.firstDay();
+                LocalDate overlappingEnd = budget.lastDay();
+                overlappingDays = DAYS.between(overlappingStart, overlappingEnd) + 1;
+            }
         }
         return overlappingDays;
     }

@@ -23,23 +23,23 @@ public class Accounting {
             return (d.equals(startYM) || d.isAfter(startYM)) && (d.equals(endYM) || d.isBefore(endYM));
         }).collect(Collectors.toList());
 
+        Period period = new Period(start, end);
+
         if (YearMonth.from(start).equals(YearMonth.from(end))) {
             double totalBudget = budgets.stream().mapToDouble(budget -> {
-                int diff = end.getDayOfMonth() - start.getDayOfMonth() + 1;
-                return diff * budget.dailyAmount();
+//                int diff = end.getDayOfMonth() - start.getDayOfMonth() + 1;
+//                return diff * budget.dailyAmount();
+                return budget.getTotalAmount(period);
             }).sum();
 
             return totalBudget;
         }
         else {
 
-            Period period = new Period(start, end);
-
             double totalAmount = 0;
             for (Budget budget : budgets) {
                 totalAmount += budget.getTotalAmount(period);
             }
-
             return totalAmount;
         }
     }

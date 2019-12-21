@@ -26,7 +26,8 @@ public class Accounting {
         if (YearMonth.from(start).equals(YearMonth.from(end))) {
             double totalBudget = budgets.stream().mapToDouble(budget -> {
                 int diff = end.getDayOfMonth() - start.getDayOfMonth() + 1;
-                return budget.amount * (diff) / start.lengthOfMonth();
+                int daysOfStartBudget = start.lengthOfMonth();
+                return diff * (double) budget.amount / daysOfStartBudget;
             }).sum();
 
             return totalBudget;

@@ -37,14 +37,10 @@ public class Accounting {
 
             double totalAmount = 0;
             for (Budget budget : budgets) {
-                totalAmount += getTotalAmount(period, budget);
+                totalAmount += budget.getTotalAmount(period);
             }
 
             return totalAmount;
         }
-    }
-
-    private double getTotalAmount(Period period, Budget budget) {
-        return period.getOverlappingDays(budget.createPeriod()) * budget.dailyAmount();
     }
 }

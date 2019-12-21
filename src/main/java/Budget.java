@@ -45,6 +45,10 @@ public class Budget {
         return getBudgetMonth().atDay(1);
     }
 
+    public Period createPeriod() {
+        return new Period(firstDay(), lastDay());
+    }
+
     private YearMonth getBudgetMonth() {
         return YearMonth.parse(yearMonth, DateTimeFormatter.ofPattern("yyyyMM"));
     }

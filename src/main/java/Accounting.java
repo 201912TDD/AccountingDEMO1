@@ -25,20 +25,6 @@ public class Accounting {
 
         Period period = new Period(start, end);
 
-//        if (YearMonth.from(start).equals(YearMonth.from(end))) {
-//            double totalBudget = budgets.stream().mapToDouble(budget -> {
-//                return budget.getTotalAmount(period);
-//            }).sum();
-//
-//            return totalBudget;
-//        }
-//        else {
-
-        double totalAmount = 0;
-        for (Budget budget : budgets) {
-            totalAmount += budget.getTotalAmount(period);
-        }
-        return totalAmount;
-//        }
+        return budgets.stream().mapToDouble(budget -> budget.getTotalAmount(period)).sum();
     }
 }

@@ -4,6 +4,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 public class Accounting {
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMM");
@@ -36,7 +38,7 @@ public class Accounting {
 
             for (Budget budget : budgets) {
 
-                int overlappingDays = getOverlappingDays(new Period(start, end), budget);
+                long overlappingDays = getOverlappingDays(new Period(start, end), budget);
 
                 totalAmount += overlappingDays * budget.dailyAmount();
             }
@@ -45,10 +47,11 @@ public class Accounting {
         }
     }
 
-    private int getOverlappingDays(Period period, Budget budget) {
-        int overlappingDays;
+    private long getOverlappingDays(Period period, Budget budget) {
+        long overlappingDays;
         if (budget.getYearMonth().equals(period.getStart().format(DateTimeFormatter.ofPattern("yyyyMM")))) {
-            overlappingDays = period.getStart().lengthOfMonth() - period.getStart().getDayOfMonth() + 1;
+            overlappingDays = DAYS.between(period.getStart(), budget.lastDay()) + 1;
+//            overlappingDays = period.getStart().lengthOfMonth() - period.getStart().getDayOfMonth() + 1;
         }
         else if (budget.getYearMonth().equals(period.getEnd().format(DateTimeFormatter.ofPattern("yyyyMM")))) {
             overlappingDays = period.getEnd().getDayOfMonth();

@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 
@@ -27,11 +28,20 @@ public class Budget {
     }
 
     public int dayCount() {
-        YearMonth month = YearMonth.parse(yearMonth, DateTimeFormatter.ofPattern("yyyyMM"));
+        YearMonth month = getBudgetMonth();
         return month.lengthOfMonth();
     }
 
     public double dailyAmount() {
         return (double) getAmount() / dayCount();
+    }
+
+    public LocalDate lastDay() {
+
+        return getBudgetMonth().atEndOfMonth();
+    }
+
+    private YearMonth getBudgetMonth() {
+        return YearMonth.parse(yearMonth, DateTimeFormatter.ofPattern("yyyyMM"));
     }
 }

@@ -35,6 +35,8 @@ public class Accounting {
             //firstMonth
             double startMonthAmount = 0;
             double endMonthAmount = 0;
+            double middleMonthAmount = 0;
+
             Budget startMonthBudget = null;
             Budget endMonthBudget = null;
             for (Budget budget : budgets) {
@@ -49,6 +51,9 @@ public class Accounting {
                     int diff = end.getDayOfMonth();
                     endMonthAmount = budget.amount * (diff) / end.lengthOfMonth();
                     endMonthBudget = budget;
+                }
+                else {
+                    middleMonthAmount += budget.amount;
                 }
             }
 
@@ -65,11 +70,11 @@ public class Accounting {
 //            }).sum();
 //
             // middle
-            List<Budget> middleBudgets = budgets;
-            middleBudgets.remove(startMonthBudget);
-            middleBudgets.remove(endMonthBudget);
-
-            double middleMonthAmount = middleBudgets.stream().mapToDouble(budget -> budget.amount).sum();
+//            List<Budget> middleBudgets = budgets;
+//            middleBudgets.remove(startMonthBudget);
+//            middleBudgets.remove(endMonthBudget);
+//
+//            middleMonthAmount = middleBudgets.stream().mapToDouble(budget -> budget.amount).sum();
 
             return startMonthAmount + endMonthAmount + middleMonthAmount;
         }

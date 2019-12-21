@@ -1,8 +1,5 @@
 import java.time.LocalDate;
-import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class Accounting {
 
@@ -15,16 +12,18 @@ public class Accounting {
 
     public double QueryBudget(LocalDate start, LocalDate end) {
 
-        List<Budget> budgets = db.GetAll().stream().filter(bd ->
-        {
-            YearMonth d = YearMonth.parse(bd.yearMonth, formatter);
-            YearMonth startYM = YearMonth.from(start);
-            YearMonth endYM = YearMonth.from(end);
-            return (d.equals(startYM) || d.isAfter(startYM)) && (d.equals(endYM) || d.isBefore(endYM));
-        }).collect(Collectors.toList());
+//        List<Budget> budgets = db.GetAll().stream().filter(bd ->
+//        {
+//            YearMonth d = YearMonth.parse(bd.yearMonth, formatter);
+//            YearMonth startYM = YearMonth.from(start);
+//            YearMonth endYM = YearMonth.from(end);
+//            return (d.equals(startYM) || d.isAfter(startYM)) && (d.equals(endYM) || d.isBefore(endYM));
+//        }).collect(Collectors.toList());
 
         Period period = new Period(start, end);
 
-        return budgets.stream().mapToDouble(budget -> budget.getTotalAmount(period)).sum();
+        return db.GetAll().stream()
+                .mapToDouble(budget -> budget.getTotalAmount(period))
+                .sum();
     }
 }

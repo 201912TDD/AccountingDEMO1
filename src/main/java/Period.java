@@ -23,6 +23,10 @@ public class Period {
 
         LocalDate overlappingStart = getStart().isAfter(another.getStart()) ? getStart() : another.getStart();
         LocalDate overlappingEnd = getEnd().isBefore(another.getEnd()) ? getEnd() : another.getEnd();
+
+        if (overlappingStart.isAfter(overlappingEnd)) {
+            return 0;
+        }
         return DAYS.between(overlappingStart, overlappingEnd) + 1;
     }
 }

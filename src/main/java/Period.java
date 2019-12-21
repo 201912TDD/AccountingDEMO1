@@ -21,8 +21,9 @@ public class Period {
 
     public long getOverlappingDays(Budget budget) {
 
-        LocalDate firstDay = budget.firstDay();
-        LocalDate lastDay = budget.lastDay();
+        Period another = new Period(budget.firstDay(), budget.lastDay());
+        LocalDate firstDay = another.getStart();
+        LocalDate lastDay = another.getEnd();
 
         LocalDate overlappingStart = getStart().isAfter(firstDay) ? getStart() : firstDay;
         LocalDate overlappingEnd = getEnd().isBefore(lastDay) ? getEnd() : lastDay;

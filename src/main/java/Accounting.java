@@ -32,26 +32,26 @@ public class Accounting {
             return totalBudget;
         }
         else {
-            double startMonthAmount = 0;
-            double endMonthAmount = 0;
-            double middleMonthAmount = 0;
+            double totalAmount = 0;
 
             for (Budget budget : budgets) {
+
                 if (budget.getYearMonth().equals(start.format(DateTimeFormatter.ofPattern("yyyyMM")))) {
                     int diff = start.lengthOfMonth() - start.getDayOfMonth() + 1;
-                    startMonthAmount = budget.amount * (diff) / start.lengthOfMonth();
+                    totalAmount += (double) (budget.amount * (diff) / start.lengthOfMonth());
                 }
                 else if (budget.getYearMonth().equals(end.format(DateTimeFormatter.ofPattern("yyyyMM")))) {
 
                     int diff = end.getDayOfMonth();
-                    endMonthAmount = budget.amount * (diff) / end.lengthOfMonth();
+                    totalAmount += (double) (budget.amount * (diff) / end.lengthOfMonth());
                 }
                 else {
-                    middleMonthAmount += budget.amount;
+                    totalAmount += (double) budget.amount;
                 }
             }
 
-            return startMonthAmount + endMonthAmount + middleMonthAmount;
+            return totalAmount;
+//            return startMonthAmount + endMonthAmount + middleMonthAmount;
         }
     }
 }

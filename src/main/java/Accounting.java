@@ -2,9 +2,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Accounting {
 
@@ -26,7 +24,7 @@ public class Accounting {
             return (d.equals(startYM) || d.isAfter(startYM)) && (d.equals(endYM) || d.isBefore(endYM));
         }).collect(Collectors.toList());
 
-        if (start.getMonth() == end.getMonth()) {
+        if (YearMonth.from(start).equals(YearMonth.from(end))) {
             double totalBudget = totalBudgets.stream().mapToDouble(budget -> {
                 int diff = end.getDayOfMonth() - start.getDayOfMonth() + 1;
                 return budget.amount * (diff) / start.lengthOfMonth();

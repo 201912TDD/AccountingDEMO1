@@ -26,3 +26,5 @@ build/test-results/test/TEST-TestAccounting.xml
 .gradle/5.2.1/javaCompile/jarAnalysis.bin
 
 .gradle/5.2.1/javaCompile/taskHistory.bin
+
+*.class

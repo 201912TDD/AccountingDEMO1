@@ -43,16 +43,6 @@ public class Accounting {
                     startMonthBudget = budget;
                 }
             }
-//            List<Budget> startMonthBudget = budgets.stream().filter(bd -> {
-//                YearMonth d = YearMonth.parse(bd.yearMonth, formatter);
-//                YearMonth startYM = YearMonth.from(start);
-//                return startYM.equals(d);
-//            }).collect(Collectors.toList());
-//
-//            startMonthAmount = startMonthBudget.stream().mapToDouble(budget -> {
-//                int diff = start.lengthOfMonth() - start.getDayOfMonth() + 1;
-//                return budget.amount * (diff) / start.lengthOfMonth();
-//            }).sum();
 
             //last month
             List<Budget> endMonthBudget = budgets.stream().filter(bd -> {

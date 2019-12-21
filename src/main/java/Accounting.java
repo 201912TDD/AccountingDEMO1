@@ -26,20 +26,22 @@ public class Accounting {
         if (YearMonth.from(start).equals(YearMonth.from(end))) {
             double totalBudget = budgets.stream().mapToDouble(budget -> {
                 int diff = end.getDayOfMonth() - start.getDayOfMonth() + 1;
-                return budget.amount * (diff) / start.lengthOfMonth();
+                return diff * budget.dailyAmount();
             }).sum();
 
             return totalBudget;
         }
         else {
             //firstMonth
+            double startMonthAmount = 0;
+
             List<Budget> startMonthBudget = budgets.stream().filter(bd -> {
                 YearMonth d = YearMonth.parse(bd.yearMonth, formatter);
                 YearMonth startYM = YearMonth.from(start);
                 return startYM.equals(d);
             }).collect(Collectors.toList());
 
-            double startMonthAmount = startMonthBudget.stream().mapToDouble(budget -> {
+            startMonthAmount = startMonthBudget.stream().mapToDouble(budget -> {
                 int diff = start.lengthOfMonth() - start.getDayOfMonth() + 1;
                 return budget.amount * (diff) / start.lengthOfMonth();
             }).sum();

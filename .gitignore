@@ -22,3 +22,7 @@ build/reports/tests/test/packages/default-package.html
 build/test-results/test/binary/results.bin
 
 build/test-results/test/TEST-TestAccounting.xml
+
+.gradle/5.2.1/javaCompile/jarAnalysis.bin
+
+.gradle/5.2.1/javaCompile/taskHistory.bin

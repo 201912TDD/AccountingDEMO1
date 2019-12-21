@@ -54,10 +54,10 @@ public class Accounting {
         }
         else if (budget.getYearMonth().equals(period.getEnd().format(DateTimeFormatter.ofPattern("yyyyMM")))) {
             overlappingDays = DAYS.between(budget.firstDay(), period.getEnd()) + 1;
-//            overlappingDays = period.getEnd().getDayOfMonth();
         }
         else {
-            overlappingDays = budget.dayCount();
+            overlappingDays = DAYS.between(budget.firstDay(), budget.lastDay()) + 1;
+//            overlappingDays = budget.dayCount();
         }
         return overlappingDays;
     }

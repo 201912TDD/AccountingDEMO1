@@ -53,6 +53,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1296" />
+    <option name="height" value="1000" />
+  </component>
   <component name="ProjectId" id="1VHdioQjzluNMH4HGq8QMFw2OZ1" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -67,6 +73,8 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java" />
     <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -80,7 +88,7 @@
       <recent name="C:\Users\watas\Documents\code\java\JoeyCourse\TDD\AccountingDEMO1\src\main" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.TestAccounting.testQueryPartialCrossMoreThanTwoMonthWithLostOneMonth">
+  <component name="RunManager" selected="Gradle.TestAccounting">
     <configuration name="TestAccounting" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -183,8 +191,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.TestAccounting.testQueryPartialCrossMoreThanTwoMonthWithLostOneMonth" />
         <item itemvalue="Gradle.TestAccounting" />
+        <item itemvalue="Gradle.TestAccounting.testQueryPartialCrossMoreThanTwoMonthWithLostOneMonth" />
         <item itemvalue="Gradle.TestAccounting.testQuerySingleMonth" />
         <item itemvalue="Gradle.TestAccounting.testQueryPartialCrossMoreThanTwoMonth" />
         <item itemvalue="Gradle.TestAccounting.testQueryPartialCrossTwoMonth" />

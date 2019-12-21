@@ -1,6 +1,3 @@
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
-
 public class Budget {
     String yearMonth;
     int amount;
@@ -24,10 +21,5 @@ public class Budget {
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    public int dayCount() {
-        YearMonth month = YearMonth.parse(yearMonth, DateTimeFormatter.ofPattern("yyyyMM"));
-        return month.lengthOfMonth();
     }
 }

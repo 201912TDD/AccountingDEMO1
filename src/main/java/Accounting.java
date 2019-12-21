@@ -25,22 +25,20 @@ public class Accounting {
 
         Period period = new Period(start, end);
 
-        if (YearMonth.from(start).equals(YearMonth.from(end))) {
-            double totalBudget = budgets.stream().mapToDouble(budget -> {
-//                int diff = end.getDayOfMonth() - start.getDayOfMonth() + 1;
-//                return diff * budget.dailyAmount();
-                return budget.getTotalAmount(period);
-            }).sum();
+//        if (YearMonth.from(start).equals(YearMonth.from(end))) {
+//            double totalBudget = budgets.stream().mapToDouble(budget -> {
+//                return budget.getTotalAmount(period);
+//            }).sum();
+//
+//            return totalBudget;
+//        }
+//        else {
 
-            return totalBudget;
+        double totalAmount = 0;
+        for (Budget budget : budgets) {
+            totalAmount += budget.getTotalAmount(period);
         }
-        else {
-
-            double totalAmount = 0;
-            for (Budget budget : budgets) {
-                totalAmount += budget.getTotalAmount(period);
-            }
-            return totalAmount;
-        }
+        return totalAmount;
+//        }
     }
 }

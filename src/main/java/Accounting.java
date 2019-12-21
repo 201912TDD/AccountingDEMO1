@@ -14,9 +14,8 @@ public class Accounting {
     }
 
     public double QueryBudget(LocalDate start, LocalDate end) {
-        List<Budget> budgets = db.GetAll();
 
-        List<Budget> totalBudgets = budgets.stream().filter(bd ->
+        List<Budget> budgets = db.GetAll().stream().filter(bd ->
         {
             YearMonth d = YearMonth.parse(bd.yearMonth, formatter);
             YearMonth startYM = YearMonth.from(start);
@@ -25,7 +24,7 @@ public class Accounting {
         }).collect(Collectors.toList());
 
         if (YearMonth.from(start).equals(YearMonth.from(end))) {
-            double totalBudget = totalBudgets.stream().mapToDouble(budget -> {
+            double totalBudget = budgets.stream().mapToDouble(budget -> {
                 int diff = end.getDayOfMonth() - start.getDayOfMonth() + 1;
                 return budget.amount * (diff) / start.lengthOfMonth();
             }).sum();
@@ -34,7 +33,7 @@ public class Accounting {
         }
         else {
             //firstMonth
-            List<Budget> startMonthBudget = totalBudgets.stream().filter(bd -> {
+            List<Budget> startMonthBudget = budgets.stream().filter(bd -> {
                 YearMonth d = YearMonth.parse(bd.yearMonth, formatter);
                 YearMonth startYM = YearMonth.from(start);
                 return startYM.equals(d);
@@ -46,7 +45,7 @@ public class Accounting {
             }).sum();
 
             //last month
-            List<Budget> endMonthBudget = totalBudgets.stream().filter(bd -> {
+            List<Budget> endMonthBudget = budgets.stream().filter(bd -> {
                 YearMonth d = YearMonth.parse(bd.yearMonth, formatter);
                 YearMonth endYM = YearMonth.from(end);
                 return endYM.equals(d);
@@ -58,7 +57,7 @@ public class Accounting {
             }).sum();
 
             // middle
-            List<Budget> middleBudgets = totalBudgets;
+            List<Budget> middleBudgets = budgets;
             middleBudgets.removeAll(startMonthBudget);
             middleBudgets.removeAll(endMonthBudget);
 

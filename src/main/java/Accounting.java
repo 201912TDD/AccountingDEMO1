@@ -39,16 +39,18 @@ public class Accounting {
 
                 if (budget.getYearMonth().equals(start.format(DateTimeFormatter.ofPattern("yyyyMM")))) {
                     overlappingDays = start.lengthOfMonth() - start.getDayOfMonth() + 1;
-                    totalAmount += overlappingDays * budget.dailyAmount();
+//                    totalAmount += overlappingDays * budget.dailyAmount();
                 }
                 else if (budget.getYearMonth().equals(end.format(DateTimeFormatter.ofPattern("yyyyMM")))) {
                     overlappingDays = end.getDayOfMonth();
-                    totalAmount += overlappingDays * budget.dailyAmount();
+//                    totalAmount += overlappingDays * budget.dailyAmount();
                 }
                 else {
                     overlappingDays = budget.dayCount();
-                    totalAmount += overlappingDays * budget.dailyAmount();
+//                    totalAmount += overlappingDays * budget.dailyAmount();
                 }
+
+                totalAmount += overlappingDays * budget.dailyAmount();
             }
 
             return totalAmount;

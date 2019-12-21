@@ -43,7 +43,7 @@ public class Accounting {
                 else if (budget.getYearMonth().equals(end.format(DateTimeFormatter.ofPattern("yyyyMM")))) {
 
                     int diff = end.getDayOfMonth();
-                    totalAmount += (double) (budget.amount * (diff) / end.lengthOfMonth());
+                    totalAmount += diff * budget.dailyAmount();
                 }
                 else {
                     totalAmount += (double) budget.amount;

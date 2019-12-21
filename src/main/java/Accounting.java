@@ -38,7 +38,7 @@ public class Accounting {
 
                 if (budget.getYearMonth().equals(start.format(DateTimeFormatter.ofPattern("yyyyMM")))) {
                     int diff = start.lengthOfMonth() - start.getDayOfMonth() + 1;
-                    totalAmount += (double) (budget.amount * (diff) / start.lengthOfMonth());
+                    totalAmount += diff * budget.dailyAmount();
                 }
                 else if (budget.getYearMonth().equals(end.format(DateTimeFormatter.ofPattern("yyyyMM")))) {
 
@@ -51,7 +51,6 @@ public class Accounting {
             }
 
             return totalAmount;
-//            return startMonthAmount + endMonthAmount + middleMonthAmount;
         }
     }
 }

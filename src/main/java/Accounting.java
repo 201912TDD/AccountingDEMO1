@@ -33,7 +33,8 @@ public class Accounting {
             }).sum();
 
             return totalBudget;
-        } else {
+        }
+        else {
             //firstMonth
             List<Budget> startMonthBudget = totalBudgets.stream().filter(bd -> {
                 YearMonth d = YearMonth.parse(bd.yearMonth, formatter);
@@ -45,8 +46,6 @@ public class Accounting {
                 int diff = start.lengthOfMonth() - start.getDayOfMonth() + 1;
                 return budget.amount * (diff) / start.lengthOfMonth();
             }).sum();
-
-
 
             //last month
             List<Budget> endMonthBudget = totalBudgets.stream().filter(bd -> {
@@ -65,10 +64,9 @@ public class Accounting {
             middleBudgets.removeAll(startMonthBudget);
             middleBudgets.removeAll(endMonthBudget);
 
-            double middleMonthAmount = middleBudgets.stream().mapToDouble(budget -> budget.amount ).sum();
+            double middleMonthAmount = middleBudgets.stream().mapToDouble(budget -> budget.amount).sum();
 
             return startMonthAmount + endMonthAmount + middleMonthAmount;
         }
-
     }
 }
